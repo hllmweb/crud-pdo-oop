@@ -26,7 +26,10 @@ class lista extends conexaoPDO{
 
     public function listaDado(){
         $this->query = "SELECT * FROM $this->tabela WHERE $this->campo = '$this->valor'";
-        $result = parent::executarQuery($this->query);
+        //$result = parent::executarQuery($this->query);
+
+        $result = $this->pdo->prepare($this->query);
+        $result->execute();
 
         return $result->fetch(PDO::FETCH_ASSOC);
     }
